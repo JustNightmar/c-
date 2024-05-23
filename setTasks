@@ -1,0 +1,73 @@
+1
+#include <iostream>
+#include <string>
+#include <set>
+using namespace std;
+int main() {
+	string s;
+	getline(cin, s);
+	set<char> set1(s.begin(), s.end());
+	if (s.size() != set1.size()) {
+		cout << "Have duplicate" << endl;
+	}
+	else {
+		cout << "Don’t have duplicate" << endl;
+	}
+    return 0;
+}
+2
+#include <iostream>
+#include <string>
+#include <set>
+using namespace std;
+int main() {
+	string s1;
+	string s2;
+	getline(cin, s1);
+	getline(cin, s2);
+	set<char> check;
+	set_union(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(check, check.begin()));
+
+	if (check.size() == 10) {
+		cout << "Have all numbers" << endl;
+	}
+	else {
+		cout << "Don't have all numbers" << endl;
+	}
+    return 0;
+}
+3
+#include <iostream>
+#include <string>
+#include <set>
+#include <sstream>
+using namespace std;
+int main() {
+	string s1;
+	string s2;
+	getline(cin, s1);
+	getline(cin, s2);
+	stringstream ss1(s1);
+	stringstream ss2(s2);
+	
+	set<int> nums1;
+	set<int> nums2;
+
+	while (getline(ss1, s1, ' ')) {
+		if (s1.size() > 0) {
+			nums1.insert(stoi(s1));
+		}
+	}
+	while (getline(ss2, s2, ' ')) {
+		if (s2.size() > 0) {
+			nums2.insert(stoi(s2));
+		}
+	}
+	
+	set<int> res;
+
+	set_intersection(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), inserter(res, res.begin()));
+
+	cout << res.size() << endl;
+    return 0;
+}
