@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+using namespace std;
+
+//FOR OUTPUT, OPTIONAL
+template<typename K, typename V>
+ostream& operator<<(ostream& os, const map<K, V>& m) {
+	for (const auto& p : m) {
+		os << p.first << " : ";
+		for (const auto e : p.second) {
+			os << e << '\t';
+		} cout << endl;
+	}
+	return os;
+}
+
+map<string, vector<int>> getGrades() {
+	map<string, vector<int>> m;
+	int n = 0;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		string s1;
+		int a = 0;
+		cin >> s1 >> a;
+		if (m.count(s1)) {m[s1].push_back(a);} else {m[s1] = vector<int>{ a };}
+	}
+	return m;
+}
+
+int main() {
+	map<string, vector<int>> grades = getGrades();
+	cout << grades;
+  return 0;
+}
