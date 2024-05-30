@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+#include <regex>
+using namespace std;
+
+bool getCorrectEmail(regex rgx, string str){
+	smatch m;
+	return regex_match(str, m, rgx);
+}
+
+itn main() {
+	regex rgx(“\D([a-zA-Z0-9]?[_]?)+[@][a-z]+\.[a-z]+”);
+	string s1(“steve1337@mail.blah”);
+	string s2(“_@email.org”);
+	string s3(“hello_you@my.home”);
+	string s4(“nickname@george15.xyz”);
+	string s5(“012bro@validdomain.com”);
+	string s6(“someuser@somedomain”);
+	cout << getCorrectDomain(rgx, s1) << endl;
+	cout << getCorrectDomain(rgx, s2) << endl;
+	cout << getCorrectDomain(rgx, s3) << endl;
+	cout << getCorrectDomain(rgx, s4) << endl;
+	cout << getCorrectDomain(rgx, s5) << endl;
+	cout << getCorrectDomain(rgx, s6) << endl;
+}
