@@ -1,0 +1,19 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main() {
+	string s = "indivisibilitys";
+	map<char, int> m;
+	for (auto c : s) {
+		m.count(c) ? m[c]++ : m[c] = 1;
+	}
+	int count = 0;
+	for (auto e : m) {
+		if (e.second > 1) {
+			count++;
+		}
+	}
+	cout << count;
+    return 0;
+}
