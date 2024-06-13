@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+#include <regex>
+#include <map>
+#include <fstream>
+using namespace std;
+
+string getContent(const string& filename) {
+	ifstream fin;
+	fin.open(filename);
+	if (!fin.is_open()) {
+		return "";
+	}
+	string text((istreambuf_iterator<char>(fin)), (istreambuf_iterator<char>()));
+	return text;
+}
+
+int main() {
+	map<string, int> dict;
+	string text = getContent("text.txt");
+	regex rgx("[a-zA-Z_][a-zA-Z0-9_]*@[a-z]+\\.[a-z]+");
+	smatch m;
+	auto strIt = text.cbegin();
+	while (regex_search(strIt, text.cend(), m, rgx)) {
+		dict.count(m.str()) ? dict[m.str()]++ : dict[m.str()] = 1;
+		strIt = m.suffix().first;
+	}
+	for (auto p : dict) cout << p.first << " : " << p.second << endl;
+    return 0;
+}
